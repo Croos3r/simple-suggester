@@ -1,7 +1,20 @@
 {
   "name": "simple-suggester",
-  "version": "1.0.0",
-  "repository": "git@github.com:Croos3r/simple-suggester.git",
+  "private": true,
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Croos3r/simple-suggester.git"
+  },
   "author": "Croos3r <crooser@proton.me>",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "description": "A simple suggestions app to gather, vote and share suggestions",
+  "bugs": {
+    "url": "https://github.com/Croos3r/simple-suggester/issues"
+  },
+  "homepage": "https://github.com/Croos3r/simple-suggester#readme"
 }
