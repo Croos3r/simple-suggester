@@ -27,6 +27,14 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env*
+!.env.*.example
+!.env.example
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
 
 # vercel
 .vercel
@@ -64,11 +72,6 @@ web_modules/
 .node_repl_history
 *.tgz
 .yarn-integrity
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-.env.local
 .cache
 .parcel-cache
 .next

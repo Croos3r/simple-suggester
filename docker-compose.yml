@@ -1,0 +1,50 @@
+services:
+  reverse_proxy:
+    image: caddy:2.7.6-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - public_network
+
+  client:
+    build: ./client
+    networks:
+      - public_network
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    env_file: server/.env
+    networks:
+      - backend_network
+      - public_network
+    depends_on:
+      - database
+
+  database:
+    image: postgres:16.0-alpine3.18
+    env_file: .env.database
+    ports:
+      - "5432:5432"
+    volumes:
+      - database_volume:/var/lib/postgresql/data
+    networks:
+      - backend_network
+
+volumes:
+  database_volume:
+  caddy_data:
+  caddy_config:
+
+networks:
+  public_network:
+  backend_network:
