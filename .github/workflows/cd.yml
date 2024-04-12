@@ -23,7 +23,6 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            echo ${{ secrets.SCP_TARGET }}
             cd ${{ secrets.SCP_TARGET }}
             docker compose down --remove-orphans
 
