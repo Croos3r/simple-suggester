@@ -1,0 +1,39 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to production
+    environment: Production
+    concurrency:
+      group: ${{ github.workflow }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Stop the webapp and backend
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ${{ secrets.SCP_TARGET }}
+            docker compose down --remove-orphans
+
+      - name: Deploying the new webapp and backend
+        uses: kostyaten/ssh-server-deploy@v4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          private_key: ${{ secrets.SSH_KEY }}
+          scp_source: .
+          scp_target: ${{ secrets.SCP_TARGET }}
+          after_script: |
+            cd ${{ secrets.SCP_TARGET }}
+            docker compose up --build -d
