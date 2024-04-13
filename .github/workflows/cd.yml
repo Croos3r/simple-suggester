@@ -29,7 +29,7 @@ jobs:
       - name: Deploying the new webapp and backend
         uses: kostyaten/ssh-server-deploy@v4
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           private_key: ${{ secrets.SSH_KEY }}
           scp_source: .
