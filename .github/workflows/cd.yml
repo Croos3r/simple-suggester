@@ -24,7 +24,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd ${{ secrets.SCP_TARGET }}
-            docker compose down --remove-orphans
+            docker compose down --remove-orphans && rm -rf .git/
 
       - name: Deploying the new webapp and backend
         uses: kostyaten/ssh-server-deploy@v4
@@ -36,4 +36,4 @@ jobs:
           scp_target: ${{ secrets.SCP_TARGET }}
           after_script: |
             cd ${{ secrets.SCP_TARGET }}
-            docker compose up --build -d
+            docker compose up --build -d 
