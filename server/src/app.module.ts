@@ -4,9 +4,11 @@ import { DATA_SOURCE_OPTIONS } from './database';
 
 @Controller()
 export class AppController {
-  @Get()
-  getHello(): string {
-    return 'Hello World!';
+  @Get('/hello')
+  getHello() {
+    return {
+      hello: 'world',
+    };
   }
 }
 
