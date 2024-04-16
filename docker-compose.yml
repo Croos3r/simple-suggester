@@ -2,7 +2,7 @@ services:
   client:
     build: ./client
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     depends_on:
       - server
 
@@ -10,7 +10,7 @@ services:
     build: ./server
     env_file: server/.env
     ports:
-      - "3001:3001"
+      - "127.0.0.1:3001:3001"
     networks:
       - backend_network
     depends_on:
