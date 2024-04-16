@@ -1,16 +1,16 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export default class User {
-    @PrimaryGeneratedColumn('uuid')
-    uuid: string;
+  @PrimaryGeneratedColumn('uuid')
+  uuid: string;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    hashedPassword: string;
+  @Column()
+  hashedPassword: string;
 
-    @Column()
-    admin: boolean;
+  @Column()
+  admin: boolean;
 }
