@@ -5,6 +5,10 @@ services:
       - "127.0.0.1:3000:3000"
     depends_on:
       - server
+    develop:
+      watch:
+        - action: rebuild
+          path: ./client
 
   server:
     build: ./server
@@ -15,6 +19,10 @@ services:
       - backend_network
     depends_on:
       - database
+    develop:
+      watch:
+        - action: rebuild
+          path: ./server
 
   database:
     image: postgres:16.0-alpine3.18
